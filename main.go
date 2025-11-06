@@ -6,30 +6,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	iface "github.com/LPinsight/smartMirror-plugin-weather/interface"
 )
-
-type PluginMeta struct {
-	Name         string `json:"name"`
-	Version      string `json:"version"`
-	Beschreibung string `json:"beschreibung"`
-	Author       string `json:"author"`
-}
-
-type Endpoint struct {
-	Path    string   `json:"path"`
-	Methods []string `json:"methods"`
-	Handler string   `json:"handler"`
-}
-
-type PluginConfig struct {
-	Port      int        `json:"port"`
-	Endpoints []Endpoint `json:"endpoints"`
-}
 
 func main() {
 	// api.json lesen
 	metaFile, _ := os.ReadFile("plugin.json")
-	var meta PluginMeta
+	var meta iface.PluginMeta
 	json.Unmarshal(metaFile, &meta)
 
 	fmt.Printf("Starte Plugin: %s v%s\nBeschreibung: %s\n\n", meta.Name, meta.Version, meta.Beschreibung)
@@ -40,7 +24,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var cfg PluginConfig
+	var cfg iface.PluginConfig
 	if err := json.Unmarshal(file, &cfg); err != nil {
 		log.Fatal(err)
 	}
@@ -73,6 +57,11 @@ func main() {
 
 		fmt.Printf("Endpoint registriert: %s Methods: %v -> Handler: %s\n", ep.Path, ep.Methods, ep.Handler)
 	}
+
+	uiDir := "./ui"
+	fs := http.FileServer(http.Dir(uiDir))
+	http.Handle("/ui/", http.StripPrefix("/ui/", fs))
+	fmt.Printf("Static UI wird bereitgestellt unter: http://localhost:%d/ui\n", cfg.Port)
 
 	addr := fmt.Sprintf(":%d", cfg.Port)
 	log.Printf("Plugin läuft auf %s\n", addr)

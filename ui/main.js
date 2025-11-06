@@ -1,15 +1,19 @@
 class WeatherPlugin extends HTMLElement {
   async connectedCallback() {
-    const config = this.config || {};
+    const config = this.config || {};  
+
+    // Basis-URL aus Attribut
+    const baseUrl = this.getAttribute('base-url');
+    if (!baseUrl) throw new Error("base-url attribute is required");   
 
     // 1. CSS laden
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = 'http://localhost:8080/plugins/weather/ui/style.css';
+    style.href = `${baseUrl}/style.css`;
     this.appendChild(style);
 
     // 2. HTML laden
-    const htmlResponse = await fetch('http://localhost:8080/plugins/weather/ui/template.html');
+    const htmlResponse = await fetch(`${baseUrl}/template.html`);
     const html = await htmlResponse.text();
     this.innerHTML += html; // HTML in Shadow DOM oder direkt ins Element
 
