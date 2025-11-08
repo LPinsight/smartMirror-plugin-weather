@@ -1,10 +1,11 @@
 package iface
 
 type PluginMeta struct {
-	Name         string `json:"name"`
-	Version      string `json:"version"`
-	Beschreibung string `json:"beschreibung"`
-	Author       string `json:"author"`
+	Name          string `json:"name"`
+	Version       string `json:"version"`
+	Beschreibung  string `json:"beschreibung"`
+	GitRepository string `json:"git-repository"`
+	Author        string `json:"author"`
 }
 
 type Endpoint struct {
