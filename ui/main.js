@@ -29,4 +29,4 @@ class WeatherPlugin extends HTMLElement {
   }
 }
 
-customElements.define('weather-plugin', WeatherPlugin);
+customElements.define('smartmirror-plugin-weather', WeatherPlugin);
