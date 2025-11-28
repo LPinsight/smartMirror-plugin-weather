@@ -50,4 +50,6 @@ Issues, Feedback oder Erweiterungswünsche kannst du direkt im GitHub-Repository
 
 ## 📄 Lizenz
 
+Für die Wetter-Icons wurde das GitHub Repository [weather-icons von basmilius](https://github.com/basmilius/weather-icons) verwendet.  
+Die Icons stehen unter der **MIT-Lizenz**, die Lizenzbedingungen sind [hier](https://github.com/basmilius/weather-icons/blob/master/LICENSE) einsehbar.
 Dieses Projekt steht unter der **MIT-Lizenz**.

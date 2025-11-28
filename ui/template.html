@@ -1,4 +1,14 @@
-<div class="weather">
-  <h2>☀️ Weather-Plugin</h2>
-  <div id="temp">Loading...</div>
-</div>
+<div id="forecast-container"></div>
+
+<template id="forecast-template">
+  <section class="forecast-item">
+    <p class="date-cast">Sa</p>
+    <img class="icon-cast" src="./assets/icons/wi_not-available.svg" alt="">
+    <p class="tempMin-cast">min. 4.8°C</p>
+    <p class="tempMax-cast">max. 8.6°C</p>
+    <p class="regen">
+      <img src="./assets/wi_umbrella.svg" alt="">
+      <span class="regen-cast">20%</span>
+    </p>
+  </section>
+</template>

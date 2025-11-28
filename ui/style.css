@@ -1,5 +1,68 @@
-.weather {
+h1 {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 4rem;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+h5 {
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 2rem
+}
+
+div#forecast-container {
   font-family: sans-serif;
   color: white;
   text-align: center;
+}
+
+div#forecast-container section{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div#forecast-container section p.date-cast{
+  width: 3.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+div#forecast-container section img{
+  width: 4.5rem;
+}
+
+div#forecast-container section p.regen{
+  width: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+div#forecast-container section p.tempMax-cast {
+  padding-left: 0.5rem;
+}
+
+div#forecast-container section p.regen img{
+  width: 3.5rem;
+}
+
+div#forecast-container section p.regen span{
+  position: relative;
+  left: -5px;
 }

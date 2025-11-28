@@ -4,7 +4,8 @@ class WeatherPlugin extends HTMLElement {
 
     // Basis-URL aus Attribut
     const baseUrl = this.getAttribute('base-url');
-    if (!baseUrl) throw new Error("base-url attribute is required");   
+    if (!baseUrl) throw new Error("base-url attribute is required");
+    this.baseUrl = baseUrl 
 
     // 1. CSS laden
     const style = document.createElement('link');
@@ -14,18 +15,27 @@ class WeatherPlugin extends HTMLElement {
 
     // 2. HTML laden
     const htmlResponse = await fetch(`${baseUrl}/template.html`);
-    const html = await htmlResponse.text();
+    let html = await htmlResponse.text();
+
+    // Asset-Pfade ersetzen: ./assets/... → ${baseUrl}/assets/...
+    html = html.replace(/\.\/assets\//g, `${baseUrl}/assets/`);
+
     this.innerHTML += html; // HTML in Shadow DOM oder direkt ins Element
 
     // 3. Logik
-    const tempEl = this.querySelector("#temp");
-    fetch('https://api.open-meteo.com/v1/forecast?latitude=50&longitude=8&current_weather=true')
-      .then(res => res.json())
-      .then(data => {
-        tempEl.textContent = `${data.current_weather.temperature}°C`;
-      });
 
-      
+    //Module laden
+    const weatherModule = await import(`${baseUrl}/logic/weather.js`);
+    
+    this.weather = weatherModule;
+
+    this.updateView()
+
+    setInterval(() => this.updateView(), 1000*60*30); // alle 30 minuten
+  }
+
+  updateView() {
+    this.weather.getWeatherData(this.baseUrl)
   }
 }
 
