@@ -1,6 +1,6 @@
 class WeatherPlugin extends HTMLElement {
   async connectedCallback() {
-    const config = this.config || {};  
+    const config = this.config || {};
 
     // Basis-URL aus Attribut
     const baseUrl = this.getAttribute('base-url');
@@ -31,11 +31,11 @@ class WeatherPlugin extends HTMLElement {
 
     this.updateView()
 
-    setInterval(() => this.updateView(), 1000*60*30); // alle 30 minuten
+    setInterval(() => this.updateView(), 1000*60*60* config["updateInterval"]); // alle x Stunden
   }
 
   updateView() {
-    this.weather.getWeatherData(this.baseUrl)
+    this.weather.getWeatherData(this, this.config, this.baseUrl)
   }
 }
 

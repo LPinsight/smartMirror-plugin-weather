@@ -1,53 +1,50 @@
-const lat = 49.926502
-const lon = 8.406923
-const timezone = 'Europe/Berlin'
-const vorhersage = 5
-
 const daily = 'temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code'
 
-const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=${daily}&timezone=${timezone}&forecast_days=${vorhersage+1}`
+export function getWeatherData(root, config, baseURL) {
+     console.log(config);
 
-export function getWeatherData(baseURL) {  
-  fetch(url)
-  .then(res => res.json())
-  .then(data => {      
-    const {time, precipitation_probability_max, temperature_2m_min, temperature_2m_max, weather_code} = data.daily
+     const timezone = config["Zeitzone"]
+     const lat = config["lat"]
+     const lon = config["lon"]
+     const vorhersage = config["vorhersage"]
 
-    const now = new Date();
-    const futureWeather = time.map((t, i) => ({
-        date: new Date(t),
-        dateString: new Date(t).toLocaleDateString("de-DE", {
-          weekday: "short",
-        }),
-        tempMin: temperature_2m_min[i].toFixed(1),
-        tempMax: temperature_2m_max[i].toFixed(1),
-        regen: precipitation_probability_max[i].toFixed(0),
-        icon: getIconForWeather(weather_code[i])
-    })).filter(entry => entry.date > now);
+     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=${daily}&timezone=${timezone}&forecast_days=${vorhersage+1}`
 
-    console.log(futureWeather);
+     fetch(url)
+     .then(res => res.json())
+     .then(data => {      
+          const {time, precipitation_probability_max, temperature_2m_min, temperature_2m_max, weather_code} = data.daily
 
-    // --- DOM ---
+          const now = new Date();
+          const futureWeather = time.map((t, i) => ({
+               date: new Date(t),
+               dateString: new Date(t).toLocaleDateString("de-DE", {
+               weekday: "short",
+               }),
+               tempMin: temperature_2m_min[i].toFixed(1),
+               tempMax: temperature_2m_max[i].toFixed(1),
+               regen: precipitation_probability_max[i].toFixed(0),
+               icon: getIconForWeather(weather_code[i])
+          })).filter(entry => entry.date > now);
 
-    const container = document.getElementById("forecast-container");
-    const template = document.getElementById("forecast-template");
+          // --- DOM ---
+          const container = root.querySelector("#forecast-container");
+          const template = root.querySelector("#forecast-template");
 
-    container.innerHTML = ""; // alte Einträge löschen
+          container.innerHTML = ""; // alte Einträge löschen
 
-    futureWeather.forEach(day => {
-      const element = template.content.cloneNode(true)
+          futureWeather.forEach(day => {
+               const element = template.content.cloneNode(true)
 
-      element.querySelector(".date-cast").textContent = day.dateString
-      element.querySelector(".icon-cast").src = `${baseURL}/assets/icons/${day.icon.icon}`
-      element.querySelector(".tempMin-cast").textContent = `min. ${day.tempMin}°C`
-      element.querySelector(".tempMax-cast").textContent = `max. ${day.tempMax}°C`
-      element.querySelector(".regen-cast").textContent = `${day.regen}%`
+               element.querySelector(".date-cast").textContent = day.dateString
+               element.querySelector(".icon-cast").src = `${baseURL}/assets/icons/${day.icon.icon}`
+               element.querySelector(".tempMin-cast").textContent = `min. ${day.tempMin}°C`
+               element.querySelector(".tempMax-cast").textContent = `max. ${day.tempMax}°C`
+               element.querySelector(".regen-cast").textContent = `${day.regen}%`
 
-      container.appendChild(element)
-    });
-
-
-  })
+               container.appendChild(element)
+          });
+     })
 }
 
 export function getIconForWeather(code) {

@@ -1,32 +1,44 @@
 [{
-  "name": "API Key",
+  "name": "Zeitzone",
+  "displayname": "Zeitzone",
   "inputType": "text",
-  "default": "XXXXX-XXXXX-XXXXX-XXXXX",
-  "placeholder": "API Key"
+  "default": "Europe/Berlin",
+  "placeholder": "Zeitzone"
 },{
-  "name": "Spiegel Standort",
+  "name": "vorhersage",
+  "displayname": "Anzahl Tage der Vorhersage",
+  "inputType": "number",
+  "default": 5,
+  "placeholder": ""
+},{
+  "name": "system_location",
+  "displayname": "Spiegel Standort",
   "inputType": "checkbox",
   "default": true,
   "placeholder": ""
 },{
-  "name": "Alternative Koordinate (lat)",
+  "name": "lat",
+  "displayname": "Alternative Koordinate (lat)",
   "inputType": "text",
   "default": "",
   "placeholder": "falls abweichend"
 },{
-  "name": "Alternative Koordinate (lon)",
+  "name": "lon",
+  "displayname": "Alternative Koordinate (lon)",
   "inputType": "text",
   "default": "",
   "placeholder": "falls abweichend"
 },{
   "name": "Einheit",
+  "displayname": "Einheit",
   "inputType": ["Celsius", "Fahrenheit"],
   "default": "Celsius",
-  "placeholder": "string"
-}, {
+  "placeholder": ""
+},{
   "name": "updateInterval",
+  "displayname": "updateInterval in Stunden",
   "inputType": "number",
-  "default": 60000,
-  "placeholder": "string"
+  "default": 6,
+  "placeholder": ""
 }]
 
