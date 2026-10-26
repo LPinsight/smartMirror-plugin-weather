@@ -2,6 +2,14 @@ class WeatherPlugin extends HTMLElement {
   async connectedCallback() {
     const config = this.config || {};
 
+    const lat = config["lat"]?.trim();
+    const lon = config["lon"]?.trim();
+
+    if (lat ==="" || lon === "" || !Number.isFinite(Number(lat)) || !Number.isFinite(Number(lon))) {
+      this.innerHTML = "<p class=\"configuration-message\">Bitte konfiguriere zuerst den Standort des Widgets.</p>";
+      return
+    }
+
     // Basis-URL aus Attribut
     const baseUrl = this.getAttribute('base-url');
     if (!baseUrl) throw new Error("base-url attribute is required");

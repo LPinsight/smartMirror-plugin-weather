@@ -1,8 +1,6 @@
 const daily = 'temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code'
 
 export function getWeatherData(root, config, baseURL) {
-     console.log(config);
-
      const timezone = config["Zeitzone"]
      const lat = config["lat"]
      const lon = config["lon"]
