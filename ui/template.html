@@ -2,13 +2,20 @@
 
 <template id="forecast-template">
   <section class="forecast-item">
-    <p class="date-cast">Sa</p>
-    <img class="icon-cast" src="./assets/icons/wi_not-available.svg" alt="">
-    <p class="tempMin-cast">min. 4.8°C</p>
-    <p class="tempMax-cast">max. 8.6°C</p>
-    <p class="regen">
+    <p class="tag" data-day-cast></p>
+    <img data-icon-cast src="./assets/icons/wi_not-available.svg" alt="">
+    <div>
+      <h6>min. </h6>
+      <p><span data-tempMin-cast></span>°C</p>
+    </div>
+    <div>
+      <h6>max. </h6>
+      <p><span data-tempMax-cast></span>°C</p>
+    </div>
+    <div class="regen">
       <img src="./assets/wi_umbrella.svg" alt="">
-      <span class="regen-cast">20%</span>
-    </p>
+      <p data-regen-cast></p>
+    </div>
+
   </section>
 </template>

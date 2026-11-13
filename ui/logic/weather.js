@@ -34,11 +34,11 @@ export function getWeatherData(root, config, baseURL) {
           futureWeather.forEach(day => {
                const element = template.content.cloneNode(true)
 
-               element.querySelector(".date-cast").textContent = day.dateString
-               element.querySelector(".icon-cast").src = `${baseURL}/assets/icons/${day.icon.icon}`
-               element.querySelector(".tempMin-cast").textContent = `min. ${day.tempMin}°C`
-               element.querySelector(".tempMax-cast").textContent = `max. ${day.tempMax}°C`
-               element.querySelector(".regen-cast").textContent = `${day.regen}%`
+               element.querySelector("[data-day-cast]").textContent = day.dateString
+               element.querySelector("[data-icon-cast]").src = `${baseURL}/assets/icons/${day.icon.icon}`
+               element.querySelector("[data-tempMin-cast]").textContent = `${day.tempMin}`
+               element.querySelector("[data-tempMax-cast]").textContent = `${day.tempMax}`
+               element.querySelector("[data-regen-cast]").textContent = `${day.regen}%`
 
                container.appendChild(element)
           });
