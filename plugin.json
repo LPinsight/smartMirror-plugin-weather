@@ -1,6 +1,6 @@
 {
   "name": "smartMirror-plugin-weather",
-  "version": "v0.0.2-alpha",
+  "version": "v1.0.0-alpha",
   "repository": "https://github.com/LPinsight/smartMirror-plugin-weather",
   "beschreibung": "Zeigt Wetterinformationen an",
   "author": "Slibbo"
